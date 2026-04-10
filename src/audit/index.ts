@@ -70,8 +70,13 @@ export function printAuditEntry(entry: AuditEntry): void {
     : "—";
   const rule = entry.decision.ruleId ?? "—";
   const ts = new Date(entry.recordedAt).toISOString();
+  const actor = `${entry.request.actor.actorId}[${entry.request.actor.role}@${entry.request.actor.partnerId}]`;
 
   console.log(`  [${status}] ${ts}  action=${action} from=${from} to=${to} amount=${amount} rule=${rule}`);
+  console.log(`           actor: ${actor}`);
+  if (entry.request.instruction) {
+    console.log(`           instruction: "${entry.request.instruction}"`);
+  }
   if (!entry.decision.allowed) {
     console.log(`           reason: ${entry.decision.reason}`);
   }
