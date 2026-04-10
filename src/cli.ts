@@ -107,7 +107,7 @@ attachActorOptions(
         amountTinybar,
         actor,
       },
-      { dryRun: opts.dryRun, verbose: opts.verbose }
+      { dryRun: opts.dryRun, verbose: opts.verbose, hedera: runtime.hedera }
     );
 
     const verdict = result.decision.allowed ? "✔  ALLOWED" : "✘  DENIED";
