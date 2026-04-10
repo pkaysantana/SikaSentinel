@@ -1,0 +1,25 @@
+{
+  "name": "sikahub-sentinel",
+  "version": "0.1.0",
+  "description": "SikaHub Sentinel – AI-powered policy enforcement agent for Hedera token operations",
+  "main": "dist/app/index.js",
+  "bin": {
+    "sentinel": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/cli.ts",
+    "demo": "ts-node scripts/demo.ts",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "@hashgraph/sdk": "^2.47.0",
+    "commander": "^12.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
