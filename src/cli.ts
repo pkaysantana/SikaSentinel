@@ -175,9 +175,10 @@ program
   .requiredOption("--account <accountId>", "Account to query (0.0.XXXXX)")
   .action(async (opts) => {
     try {
-      const result = await getBalance(opts.account);
+      const result = await getBalance(opts.account, runtime.hedera);
       console.log(`\nBalance for ${result.accountId}:`);
-      console.log(`  ${result.hbar.toFixed(8)} HBAR  (${result.tinybar} tinybar)\n`);
+      console.log(`  ${result.hbar.toFixed(8)} HBAR  (${result.tinybar} tinybar)`);
+      console.log(`  mode:  ${result.stub ? "stub" : "live"}\n`);
     } catch (err) {
       console.error("Error:", err instanceof Error ? err.message : err);
       process.exit(1);
@@ -215,12 +216,13 @@ program
   .option("--topic <topicId>", "HCS topic ID (0.0.XXXXX)", "0.0.999999")
   .action(async (opts) => {
     try {
-      const entries = await fetchAuditLog(opts.topic);
+      const topicId = opts.topic ?? runtime.hedera?.auditTopicId ?? "0.0.999999";
+      const entries = await fetchAuditLog(topicId, runtime.hedera);
       if (entries.length === 0) {
         console.log("\nNo audit entries found.\n");
         return;
       }
-      console.log(`\nAudit Log – topic ${opts.topic} (${entries.length} entries):\n`);
+      console.log(`\nAudit Log – topic ${topicId} (${entries.length} entries):\n`);
       entries.forEach(printAuditEntry);
       console.log();
     } catch (err) {
@@ -231,7 +233,12 @@ program
 
 // ── parse ─────────────────────────────────────────────────────────────────────
 
-program.parseAsync(process.argv).catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+program
+  .parseAsync(process.argv)
+  .catch((err) => {
+    console.error(err);
+    process.exitCode = 1;
+  })
+  .finally(() => {
+    closeHederaClients();
+  });
