@@ -10,6 +10,7 @@
     "build": "tsc",
     "dev": "ts-node src/cli.ts",
     "demo": "ts-node scripts/demo.ts",
+    "demo:run": "ts-node scripts/run-demo.ts",
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
