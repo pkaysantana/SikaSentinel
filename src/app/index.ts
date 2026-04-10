@@ -13,9 +13,20 @@ export { evaluatePolicy, DEFAULT_POLICY } from "../policy/index";
 export { parseInstruction } from "../nlp/index";
 export type { InstructionParseResult } from "../nlp/index";
 
-export { getBalance, transferHbar, ensureTopic, writeAudit, readAudit } from "../hedera/index";
+export {
+  getBalance,
+  transferHbar,
+  ensureTopic,
+  writeAudit,
+  readAudit,
+  closeHederaClients,
+  resetStubState,
+} from "../hedera/index";
 
 export { recordAuditEntry, fetchAuditLog, printAuditEntry } from "../audit/index";
+
+export { loadRuntimeConfig } from "../config/index";
+export type { RuntimeConfig } from "../config/index";
 
 export type {
   ActionRequest,

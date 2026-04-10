@@ -17,17 +17,24 @@
 
 import { Command, Option } from "commander";
 import { runAgent, runInstruction } from "./agent/index";
-import { getBalance } from "./hedera/index";
+import { getBalance, closeHederaClients } from "./hedera/index";
 import { fetchAuditLog, printAuditEntry } from "./audit/index";
 import { DEFAULT_POLICY } from "./policy/index";
+import { loadRuntimeConfig } from "./config/index";
 import type { ActorContext, ActorRole } from "./types/index";
+
+const runtime = loadRuntimeConfig();
 
 const program = new Command();
 
 program
   .name("sentinel")
   .description("Sika Sentinel – AI-powered policy and audit layer for Hedera workflows")
-  .version("0.1.0");
+  .version("0.1.0")
+  .hook("preAction", () => {
+    const tag = runtime.stubMode ? "STUB" : "LIVE";
+    console.log(`[sentinel] mode=${tag}  ${runtime.modeReason}`);
+  });
 
 // ── Shared actor options ─────────────────────────────────────────────────────
 
