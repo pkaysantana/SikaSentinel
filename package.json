@@ -1,7 +1,7 @@
 {
-  "name": "sikahub-sentinel",
+  "name": "sika-sentinel",
   "version": "0.1.0",
-  "description": "SikaHub Sentinel – AI-powered policy enforcement agent for Hedera token operations",
+  "description": "Sika Sentinel – AI-powered policy and audit layer for partner-operated financial workflows on Hedera",
   "main": "dist/app/index.js",
   "bin": {
     "sentinel": "dist/cli.js"
