@@ -56,7 +56,7 @@ const STUB_BALANCES: Record<string, number> = {
   "0.0.800": 1_000_000_000_000, // 10 000 HBAR
   "0.0.98": 500_000_000_000,
   "0.0.2": 2_000_000_000_000,
-  "0.0.12345": 150_000_000, // 1.5 HBAR – demo operator
+  "0.0.12345": 50_000_000_000, // 500 HBAR – demo operator
 };
 
 let stubSequence = 1;
