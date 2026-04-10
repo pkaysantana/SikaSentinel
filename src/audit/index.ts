@@ -18,7 +18,7 @@ export async function recordAuditEntry(
   outcome?: AuditEntry["outcome"],
   config?: HederaConfig
 ): Promise<AuditEntry> {
-  const topic = await ensureTopic("SikaHub-Sentinel-Audit", config);
+  const topic = await ensureTopic("Sika-Sentinel-Audit", config);
 
   const entry: AuditEntry = {
     auditId: randomUUID(),
