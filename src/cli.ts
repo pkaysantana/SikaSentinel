@@ -143,6 +143,7 @@ attachActorOptions(
       defaultInitiatorId: opts.defaultFrom,
       dryRun: opts.dryRun,
       verbose: opts.verbose,
+      hedera: runtime.hedera,
     });
 
     if (!result.parsed) {
