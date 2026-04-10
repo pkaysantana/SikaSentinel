@@ -5,14 +5,14 @@
  * For a standalone CLI use `src/cli.ts`.
  */
 
-export { runAgent } from "../agent/index.js";
-export type { AgentOptions, AgentResult } from "../agent/index.js";
+export { runAgent } from "../agent/index";
+export type { AgentOptions, AgentResult } from "../agent/index";
 
-export { evaluatePolicy, DEFAULT_POLICY } from "../policy/index.js";
+export { evaluatePolicy, DEFAULT_POLICY } from "../policy/index";
 
-export { getBalance, transferHbar, ensureTopic, writeAudit, readAudit } from "../hedera/index.js";
+export { getBalance, transferHbar, ensureTopic, writeAudit, readAudit } from "../hedera/index";
 
-export { recordAuditEntry, fetchAuditLog, printAuditEntry } from "../audit/index.js";
+export { recordAuditEntry, fetchAuditLog, printAuditEntry } from "../audit/index";
 
 export type {
   ActionRequest,
@@ -20,6 +20,6 @@ export type {
   AuditEntry,
   PolicyConfig,
   HederaConfig,
-} from "../types/index.js";
+} from "../types/index";
 
-export { ActionRequestSchema, PolicyDecisionSchema, AuditEntrySchema } from "../types/index.js";
+export { ActionRequestSchema, PolicyDecisionSchema, AuditEntrySchema } from "../types/index";

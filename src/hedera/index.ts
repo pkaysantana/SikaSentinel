@@ -6,7 +6,7 @@
  * have operator credentials and a live topic ID.
  */
 
-import type { HederaConfig } from "../types/index.js";
+import type { HederaConfig } from "../types/index";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 

@@ -10,7 +10,7 @@
  *   - audit log replay
  */
 
-import { runAgent, getBalance, fetchAuditLog, printAuditEntry } from "../src/app/index.js";
+import { runAgent, getBalance, fetchAuditLog, printAuditEntry } from "../src/app/index";
 
 const OPERATOR = "0.0.12345";
 

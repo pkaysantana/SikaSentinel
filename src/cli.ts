@@ -9,10 +9,10 @@
  */
 
 import { Command } from "commander";
-import { runAgent } from "./agent/index.js";
-import { getBalance } from "./hedera/index.js";
-import { fetchAuditLog, printAuditEntry } from "./audit/index.js";
-import { DEFAULT_POLICY } from "./policy/index.js";
+import { runAgent } from "./agent/index";
+import { getBalance } from "./hedera/index";
+import { fetchAuditLog, printAuditEntry } from "./audit/index";
+import { DEFAULT_POLICY } from "./policy/index";
 
 const program = new Command();
 

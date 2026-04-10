@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import type { ActionRequest, PolicyDecision, PolicyConfig } from "../types/index.js";
+import type { ActionRequest, PolicyDecision, PolicyConfig } from "../types/index";
 
 // ── Default policy (override via PolicyConfig) ──────────────────────────────
 

@@ -1,15 +1,15 @@
 import { randomUUID } from "crypto";
-import { evaluatePolicy, DEFAULT_POLICY } from "../policy/index.js";
-import { transferHbar, getBalance } from "../hedera/index.js";
-import { recordAuditEntry } from "../audit/index.js";
+import { evaluatePolicy, DEFAULT_POLICY } from "../policy/index";
+import { transferHbar, getBalance } from "../hedera/index";
+import { recordAuditEntry } from "../audit/index";
 import type {
   ActionRequest,
   PolicyDecision,
   AuditEntry,
   PolicyConfig,
   HederaConfig,
-} from "../types/index.js";
-import { ActionRequestSchema } from "../types/index.js";
+} from "../types/index";
+import { ActionRequestSchema } from "../types/index";
 
 // ── Agent ─────────────────────────────────────────────────────────────────────
 

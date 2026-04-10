@@ -1,11 +1,11 @@
 import { randomUUID } from "crypto";
-import { writeAudit, readAudit, ensureTopic } from "../hedera/index.js";
+import { writeAudit, readAudit, ensureTopic } from "../hedera/index";
 import type {
   ActionRequest,
   PolicyDecision,
   AuditEntry,
   HederaConfig,
-} from "../types/index.js";
+} from "../types/index";
 
 // ── Audit service ─────────────────────────────────────────────────────────────
 
