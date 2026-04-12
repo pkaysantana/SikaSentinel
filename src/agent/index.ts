@@ -3,6 +3,8 @@ import { evaluatePolicy, DEFAULT_POLICY } from "../policy/index";
 import { transferHbar, getBalance } from "../hedera/index";
 import { recordAuditEntry } from "../audit/index";
 import { parseInstruction } from "../nlp/index";
+import { buildRuntimeContext } from "../context/index";
+import type { RuntimeContext } from "../context/index";
 import type { InstructionParseResult } from "../nlp/index";
 import type {
   ActionRequest,
@@ -26,9 +28,13 @@ export interface AgentOptions {
 
 export interface AgentResult {
   request: ActionRequest;
+  /** Runtime context snapshot produced by the Context Engine */
+  runtimeContext: RuntimeContext;
   decision: PolicyDecision;
   auditEntry: AuditEntry;
 }
+
+export { RuntimeContext };
 
 export interface InstructionResult extends Partial<AgentResult> {
   /** True if the NL parser successfully produced a draft request */
@@ -73,7 +79,11 @@ export async function runAgent(
     );
   }
 
-  // 2. Policy evaluation
+  // 2. Context Engine — assemble runtime context before policy evaluation
+  const stubMode = !hedera;
+  const runtimeContext = buildRuntimeContext(request, policy, stubMode);
+
+  // 3. Policy evaluation (Clearing Agent)
   const decision = evaluatePolicy(request, policy);
 
   if (verbose) {
@@ -83,7 +93,7 @@ export async function runAgent(
     );
   }
 
-  // 3. Execute (if permitted and not a dry run)
+  // 4. Execution Adapter (if permitted and not a dry run)
   let outcome: AuditEntry["outcome"] | undefined;
 
   if (decision.allowed && !dryRun) {
@@ -92,7 +102,7 @@ export async function runAgent(
     if (verbose) console.log("[agent] Dry-run mode – skipping execution.");
   }
 
-  // 4. Audit
+  // 5. Evidence Layer — immutable audit entry on HCS
   const auditEntry = await recordAuditEntry(request, decision, outcome, hedera);
 
   if (verbose) {
@@ -101,7 +111,7 @@ export async function runAgent(
     );
   }
 
-  return { request, decision, auditEntry };
+  return { request, runtimeContext, decision, auditEntry };
 }
 
 /**

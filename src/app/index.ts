@@ -6,7 +6,9 @@
  */
 
 export { runAgent, runInstruction } from "../agent/index";
-export type { AgentOptions, AgentResult, InstructionResult } from "../agent/index";
+export type { AgentOptions, AgentResult, InstructionResult, RuntimeContext } from "../agent/index";
+
+export { buildRuntimeContext, printRuntimeContext } from "../context/index";
 
 export { evaluatePolicy, DEFAULT_POLICY } from "../policy/index";
 

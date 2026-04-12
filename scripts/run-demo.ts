@@ -12,7 +12,7 @@
  * Architecture:  LLM interprets → policy decides → Hedera executes → HCS records
  */
 
-import { runInstruction, runAgent, getBalance, fetchAuditLog } from "../src/app/index";
+import { runInstruction, runAgent, getBalance, fetchAuditLog, printRuntimeContext } from "../src/app/index";
 import { resetStubState } from "../src/hedera/index";
 import type { ActorContext } from "../src/app/index";
 
@@ -45,6 +45,22 @@ function field(label: string, value: unknown): void {
     ? JSON.stringify(value)
     : String(value);
   console.log(`  ${pad}  ${text}`);
+}
+
+function stageLabel(active: string): void {
+  const stages = [
+    "Intent Agent",
+    "Context Engine",
+    "Clearing Agent",
+    "Execution Adapter",
+    "Evidence Layer",
+  ];
+  const line = stages
+    .map((s) => (s === active ? `[${s}]` : s))
+    .join("  →  ");
+  console.log();
+  console.log(`  ${line}`);
+  console.log();
 }
 
 // ── main ─────────────────────────────────────────────────────────────────────
